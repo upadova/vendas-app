@@ -1,4 +1,4 @@
-import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserType } from '../../../shared/hooks/userType';
 
 interface UserStore {
