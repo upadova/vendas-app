@@ -1,0 +1,16 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "@types/styled-components-react-native"
+    ],
+    "plugins": [
+      {
+        "name": "ts-styled-plugin",
+        "lint": {
+          "unknownProperties": "ignore" // "ignore" | "warning" | "error"
+        }
+      }
+    ]
+  }
+}
