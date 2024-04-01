@@ -4,10 +4,11 @@ import { connectionApiPost } from '../functions/connection/connectionApi';
 import { ReturnLogin } from './returnLogin';
 import { useUserReducer } from '../../store/reducers/useReducer/useUserReducer';
 import { useGlobalReducer } from '../../store/reducers/globalReducer/useGlobalReducer';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+import { MenuUrl } from '../../enums/menuUrl';
 
 export const useRequest = () => {
-  const { navigate } = useNavigation();
+  const { reset } = useNavigation<NavigationProp<ParamListBase>>();
   const { setUser } = useUserReducer();
   const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,7 +19,10 @@ export const useRequest = () => {
     await connectionApiPost<ReturnLogin>('http://192.168.2.23:8080/auth', body)
       .then((result) => {
         setUser(result.user);
-        navigate('Home' as never);
+       reset({
+        index: 0,
+        routes:[{name: MenuUrl.HOME}]
+       })
       })
       .catch(() => {
         setModal({
