@@ -4,8 +4,10 @@ import { connectionApiPost } from '../functions/connection/connectionApi';
 import { ReturnLogin } from './returnLogin';
 import { useUserReducer } from '../../store/reducers/useReducer/useUserReducer';
 import { useGlobalReducer } from '../../store/reducers/globalReducer/useGlobalReducer';
+import { useNavigation } from '@react-navigation/native';
 
 export const useRequest = () => {
+  const { navigate } = useNavigation();
   const { setUser } = useUserReducer();
   const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,6 +18,7 @@ export const useRequest = () => {
     await connectionApiPost<ReturnLogin>('http://192.168.2.23:8080/auth', body)
       .then((result) => {
         setUser(result.user);
+        navigate('Home' as never);
       })
       .catch(() => {
         setModal({
