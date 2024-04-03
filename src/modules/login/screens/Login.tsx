@@ -3,7 +3,9 @@ import Input from '../../../shared/components/input/Input';
 import Button from '../../../shared/components/button/Button';
 import { theme } from '../../../shared/themes/themes';
 import { useLogin } from '../hooks/useLogin';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, TouchableOpacity } from 'react-native';
+import Text from '../../../shared/components/text/Text';
+import { textTypes } from '../../../shared/components/text/textTypes';
 
 const Login = () => {
   const {
@@ -14,6 +16,7 @@ const Login = () => {
     handleOnPress,
     handleOnChangeEmail,
     handleOnChangePassword,
+    handleGoToCreateUser
   } = useLogin();
 
   return (
@@ -36,9 +39,13 @@ const Login = () => {
           value={password}
           onChange={handleOnChangePassword}
         />
+        <TouchableOpacity onPress={handleGoToCreateUser}>
+          <Text margin="16px" type={textTypes.PARAGRAPH_SEMI_BOLD} color={theme.colors.mainTheme.primary}>
+            Cadastrar usuário
+          </Text>
+        </TouchableOpacity>
         <Button
           type={theme.buttons.buttonsTheme.primary}
-          margin="16px"
           title="Entrar"
           onPress={handleOnPress}
           loading={loading}

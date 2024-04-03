@@ -33,7 +33,7 @@ const Splash = () => {
     const verifyLogin = async () => {
         const [returnUser] = await Promise.all([
             findUser(),
-            new Promise((r)=>setInterval(r, TIME_SLEEP))
+            new Promise<void>((r)=>setInterval(r, TIME_SLEEP))
         ])
 
       
