@@ -5,7 +5,7 @@ import { theme } from '../../../shared/themes/themes';
 import { useCreateUser } from '../hooks/useCreateUser';
 
 const CreateUser = () => {
-  const { createUser, loading, handleOnChnageInput, handleCreateUser } = useCreateUser();
+  const { createUser, loading, disabled, handleOnChnageInput, handleCreateUser } = useCreateUser();
   return (
     <ContainerCreateUser>
       <Input
@@ -51,6 +51,7 @@ const CreateUser = () => {
         title="Confirmar Senha:"
       />
       <Button
+        disabled={disabled}
         margin="0px 0px 16px 0px"
         type={theme.buttons.buttonsTheme.primary}
         title="Criar usuário"
