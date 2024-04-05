@@ -6,6 +6,8 @@ import { USER_URL } from '../../../shared/constants/urls';
 import { MethodEnum } from '../../../enums/methods.enums';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../../enums/menuUrl';
+import { insertMaskInCpf } from '../../../shared/functions/cpf';
+import { insertMaskInPhone } from '../../../shared/functions/phone';
 
 export const useCreateUser = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -51,9 +53,21 @@ export const useCreateUser = () => {
   };
 
   const handleOnChnageInput = (e: NativeSyntheticEvent<TextInputChangeEventData>, name: string) => {
+    let text = e.nativeEvent.text;
+    switch (name) {
+      case 'cpf':
+        text = insertMaskInCpf(text);
+        break;
+      case 'phone':
+        text = insertMaskInPhone(text);
+        break;
+      default:
+        text = e.nativeEvent.text;
+        break;
+    }
     setCreateUser((currentUser) => ({
       ...currentUser,
-      [name]: e.nativeEvent.text,
+      [name]: text,
     }));
   };
 
