@@ -53,21 +53,9 @@ export const useCreateUser = () => {
   };
 
   const handleOnChnageInput = (e: NativeSyntheticEvent<TextInputChangeEventData>, name: string) => {
-    let text = e.nativeEvent.text;
-    switch (name) {
-      case 'cpf':
-        text = insertMaskInCpf(text);
-        break;
-      case 'phone':
-        text = insertMaskInPhone(text);
-        break;
-      default:
-        text = e.nativeEvent.text;
-        break;
-    }
     setCreateUser((currentUser) => ({
       ...currentUser,
-      [name]: text,
+      [name]: e.nativeEvent.text,
     }));
   };
 

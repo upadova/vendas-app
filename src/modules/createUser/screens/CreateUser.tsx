@@ -21,6 +21,7 @@ const CreateUser = () => {
         margin="0px 0px 16px 0px"
         placeholder="Digite"
         title="Telefone:"
+        type='cel-phone'
       />
       <Input
         value={createUser.email}
@@ -35,6 +36,7 @@ const CreateUser = () => {
         margin="0px 0px 16px 0px"
         placeholder="Digite"
         title="CPF:"
+        type='cpf'
       />
       <Input
         value={createUser.password}
