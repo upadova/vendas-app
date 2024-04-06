@@ -6,8 +6,9 @@ import { USER_URL } from '../../../shared/constants/urls';
 import { MethodEnum } from '../../../enums/methods.enums';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../../enums/menuUrl';
-import { insertMaskInCpf } from '../../../shared/functions/cpf';
-import { insertMaskInPhone } from '../../../shared/functions/phone';
+import { insertMaskInCpf, validCPF } from '../../../shared/functions/cpf';
+import { insertMaskInPhone, validPhone } from '../../../shared/functions/phone';
+import { validEmail } from '../../../shared/functions/email';
 
 export const useCreateUser = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -26,8 +27,11 @@ export const useCreateUser = () => {
     if (
       createUser.name !== '' &&
       createUser.cpf !== '' &&
+      validCPF(createUser.cpf) &&
       createUser.email !== '' &&
+      validEmail(createUser.email) &&
       createUser.phone !== '' &&
+      validPhone(createUser.phone) &&
       createUser.password !== '' &&
       createUser.password === createUser.confirmPassword
     ) {
