@@ -9,6 +9,7 @@ import { MenuUrl } from '../../../enums/menuUrl';
 import { insertMaskInCpf, validCPF } from '../../../shared/functions/cpf';
 import { insertMaskInPhone, validPhone } from '../../../shared/functions/phone';
 import { validEmail } from '../../../shared/functions/email';
+import { removeSpecialCaracter } from '../../../shared/functions/caracteres';
 
 export const useCreateUser = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -45,7 +46,11 @@ export const useCreateUser = () => {
     const resultCreateUser = await request({
       url: USER_URL,
       method: MethodEnum.POST,
-      body: createUser,
+      body: {
+        ...createUser,
+        phone: removeSpecialCaracter(createUser.phone),
+        cpf: removeSpecialCaracter(createUser.cpf)
+      },
       message: 'Usuário cadastrado com sucesso.',
     });
     if (resultCreateUser) {
