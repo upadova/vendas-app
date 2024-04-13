@@ -18,6 +18,16 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarActiveTintColor: theme.colors.grayTheme.gray80,
+        tabBarInactiveTintColor: theme.colors.neutralTheme.white,
+        tabBarLabelStyle: {
+          marginBottom: 8,
+        },
+        tabBarStyle: {
+          height: 52,
+          padding: 8,
+          backgroundColor: theme.colors.purpleTheme.purple80,
+        },
         tabBarIcon: ({ color }) => {
           let iconName: string;
 
@@ -35,8 +45,6 @@ const TabNavigation = () => {
           // You can return any component that you like here!
           return <Icons name={iconName} color={color} size={20} />;
         },
-        tabBarActiveTintColor: theme.colors.mainTheme.error,
-        tabBarInactiveTintColor: theme.colors.grayTheme.gary100,
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
