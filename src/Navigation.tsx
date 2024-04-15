@@ -10,6 +10,7 @@ import Splash from './modules/splash';
 import CreateUser from './modules/createUser';
 import Orders from './modules/Orders';
 import Profile from './modules/profile';
+import Product from './modules/product';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -42,19 +43,18 @@ const TabNavigation = () => {
               iconName = 'profile';
               break;
           }
-          // You can return any component that you like here!
           return <Icons name={iconName} color={color} size={20} />;
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name={MenuUrl.HOME} component={Home} options={{ headerShown: false }} />
       <Tab.Screen
-        name="Orders"
+        name={MenuUrl.ORDERS}
         component={Orders}
         options={{ title: 'Pedidos', headerShown: false }}
       />
       <Tab.Screen
-        name="Perfil"
+        name={MenuUrl.PERFIL}
         component={Profile}
         options={{ title: 'Perfil', headerShown: false }}
       />
@@ -68,6 +68,7 @@ const Navigation = () => {
       <Stack.Navigator>
         <Stack.Screen name={MenuUrl.SPLASH} component={Splash} options={{ headerShown: false }} />
         <Stack.Screen name={MenuUrl.LOGIN} component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name={MenuUrl.PRODUCT} component={Product} />
         <Stack.Screen
           name={MenuUrl.CREATE_USER}
           component={CreateUser}

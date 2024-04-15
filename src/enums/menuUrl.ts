@@ -2,5 +2,8 @@ export enum MenuUrl{
     SPLASH = 'Splash',
     LOGIN = 'Login',
     HOME = 'Home',
-    CREATE_USER = 'Criar Usuário'
+    ORDERS = 'Orders',
+    PERFIL = 'Perfil',
+    CREATE_USER = 'Criar Usuário',
+    PRODUCT = 'Produto',
 }
