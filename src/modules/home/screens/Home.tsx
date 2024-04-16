@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import Text from '../../../shared/components/text/Text';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
 import { useEffect } from 'react';
@@ -9,6 +9,7 @@ import { ProductType } from '../../../shared/types/productType';
 import { useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../../enums/menuUrl';
 import { ProductNavigationProp } from '../../product/screens/Product';
+import ProductThumbnail from '../../../shared/components/productThumbnail/ProductThumbnail';
 
 const Home = () => {
   const { request } = useRequest();
@@ -29,11 +30,11 @@ const Home = () => {
   return (
     <View>
       <Text>Home</Text>
-      {products.map((product) => (
-        <TouchableOpacity onPress={() => handleGoToProduct(product)}>
-          <Text>{product.name}</Text>
-        </TouchableOpacity>
-      ))}
+      <FlatList
+        horizontal
+        data={products}
+        renderItem={({ item }) => <ProductThumbnail margin="0px 8px" product={item} />}
+      />
     </View>
   );
 };
