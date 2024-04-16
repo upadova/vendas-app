@@ -11,6 +11,7 @@ import CreateUser from './modules/createUser';
 import Orders from './modules/Orders';
 import Profile from './modules/profile';
 import Product from './modules/product';
+import Cart from './modules/cart';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,8 +20,8 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: theme.colors.grayTheme.gray80,
-        tabBarInactiveTintColor: theme.colors.neutralTheme.white,
+        tabBarActiveTintColor: theme.colors.neutralTheme.white,
+        tabBarInactiveTintColor: theme.colors.grayTheme.gray80,
         tabBarLabelStyle: {
           marginBottom: 8,
         },
@@ -36,8 +37,11 @@ const TabNavigation = () => {
             case 'Home':
               iconName = 'home';
               break;
-            case 'Orders':
+            case 'Carrinho':
               iconName = 'cart';
+              break;
+            case 'Orders':
+              iconName = 'books';
               break;
             default:
               iconName = 'profile';
@@ -48,6 +52,7 @@ const TabNavigation = () => {
       })}
     >
       <Tab.Screen name={MenuUrl.HOME} component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name={MenuUrl.CART} component={Cart} options={{ headerShown: false }} />
       <Tab.Screen
         name={MenuUrl.ORDERS}
         component={Orders}
