@@ -1,4 +1,4 @@
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Text from '../../../shared/components/text/Text';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
 import { useEffect } from 'react';
