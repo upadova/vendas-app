@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { convertNumberToMoney } from '../../functions/money';
 import { theme } from '../../themes/themes';
 import { ProductType } from '../../types/productType';
-import Button from '../button/Button';
 import Text from '../text/Text';
 import { textTypes } from '../text/textTypes';
 import {
@@ -13,17 +12,36 @@ import {
 import { MenuUrl } from '../../../enums/menuUrl';
 import { ProductNavigationProp } from '../../../modules/product/screens/Product';
 import { Icons } from '../../icon/icon';
+import { useRequest } from '../../hooks/useRequest';
+import { CART_URL } from '../../constants/urls';
+import { MethodEnum } from '../../../enums/methods.enums';
+import { ActivityIndicator } from 'react-native';
+import { CartRequest } from '../../types/cartRequestType';
 
 interface ProductThumbnailProps {
   product: ProductType;
   margin?: string;
 }
 
+const AMOUNT_DEFAULT = 1;
+
 export const ProductThumbnail = ({ product, margin }: ProductThumbnailProps) => {
   const { navigate } = useNavigation<ProductNavigationProp>();
-
+  const { request, loading } = useRequest();
   const handleGoToProduct = (product: ProductType) => {
     navigate(MenuUrl.PRODUCT, { product });
+  };
+
+  const handleInsertInCart = () => {
+    request<unknown, CartRequest>({
+      url: CART_URL,
+      method: MethodEnum.POST,
+      body: {
+        productId: product.id,
+        amount: AMOUNT_DEFAULT,
+      },
+      message: `${product.name} inserido no carrinho.`
+    });
   };
 
   return (
@@ -33,8 +51,12 @@ export const ProductThumbnail = ({ product, margin }: ProductThumbnailProps) => 
       <Text color={theme.colors.mainTheme.error} type={textTypes.PARAGRAPH_SEMI_BOLD}>
         {convertNumberToMoney(product.price)}
       </Text>
-      <ProductInsertCart>
-        <Icons name="cart" color={theme.colors.neutralTheme.white} />
+      <ProductInsertCart onPress={handleInsertInCart}>
+        {loading ? (
+          <ActivityIndicator color={theme.colors.neutralTheme.white} />
+        ) : (
+          <Icons name="cart" color={theme.colors.neutralTheme.white} />
+        )}
       </ProductInsertCart>
     </ProductThumbnailContainer>
   );
