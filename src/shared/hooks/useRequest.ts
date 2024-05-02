@@ -10,6 +10,7 @@ import { useGlobalReducer } from '../../store/reducers/globalReducer/useGlobalRe
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../enums/menuUrl';
 import { setAuthorizationToken } from '../functions/connection/auth';
+import { AUTH_URL } from '../constants/urls';
 
 interface requestProps<T, B = unknown> {
   url: string;
@@ -32,7 +33,7 @@ export const useRequest = () => {
     saveGlobal,
     body,
     message,
-  }: requestProps<T | undefined, B>): Promise<T | undefined> => {
+  }: requestProps<T, B>): Promise<T | undefined> => {
     setLoading(true);
     const returnObject: T | undefined = await ConnectionApi.connect<T, B>(url, method, body)
       .then((result) => {
@@ -63,7 +64,7 @@ export const useRequest = () => {
 
   const authRequest = async (body: RequestLogin) => {
     setLoading(true);
-    await connectionApiPost<ReturnLogin>('http://192.168.2.23:8080/auth', body)
+    await connectionApiPost<ReturnLogin>(AUTH_URL, body)
       .then((result) => {
         setAuthorizationToken(result.accessToken);
         setUser(result.user);

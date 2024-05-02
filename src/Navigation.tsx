@@ -12,6 +12,7 @@ import Orders from './modules/Orders';
 import Profile from './modules/profile';
 import Product from './modules/product';
 import Cart from './modules/cart';
+import { SearchProduct } from './modules/searchProduct/screens/SerchProduct';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,6 +44,9 @@ const TabNavigation = () => {
             case 'Orders':
               iconName = 'books';
               break;
+            case 'searchProduct':
+              iconName = 'search';
+              break;
             default:
               iconName = 'profile';
               break;
@@ -51,8 +55,21 @@ const TabNavigation = () => {
         },
       })}
     >
-      <Tab.Screen name={MenuUrl.HOME} component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name={MenuUrl.CART} component={Cart} options={{ headerShown: false }} />
+      <Tab.Screen
+        name={MenuUrl.HOME}
+        component={Home}
+        options={{ title: 'Home', headerShown: false }}
+      />
+      <Tab.Screen
+        name={MenuUrl.CART}
+        component={Cart}
+        options={{ title: 'Carrinho', headerShown: false }}
+      />
+      <Tab.Screen
+        name={MenuUrl.SEARCH_PRODUCT}
+        component={SearchProduct}
+        options={{ title: 'Buscar', headerShown: false }}
+      />
       <Tab.Screen
         name={MenuUrl.ORDERS}
         component={Orders}

@@ -1,5 +1,4 @@
 import { FlatList, View } from 'react-native';
-import Text from '../../../shared/components/text/Text';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
 import { useEffect } from 'react';
 import { useRequest } from '../../../shared/hooks/useRequest';
@@ -10,6 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../../enums/menuUrl';
 import { ProductNavigationProp } from '../../product/screens/Product';
 import ProductThumbnail from '../../../shared/components/productThumbnail/ProductThumbnail';
+import Input from '../../../shared/components/input/Input';
+import { Icons } from '../../../shared/icon/icon';
+import { HomeContainer } from '../styles/home.styles';
 
 const Home = () => {
   const { request } = useRequest();
@@ -29,7 +31,9 @@ const Home = () => {
 
   return (
     <View>
-      <Text>Home</Text>
+      <HomeContainer>
+        <Input iconRight='search'/>
+      </HomeContainer>
       <FlatList
         horizontal
         data={products}

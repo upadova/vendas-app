@@ -5,7 +5,7 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import { ContainerInput, IconEye } from './Input.style';
+import { ContainerInput, IconEye, IconSearch } from './Input.style';
 import { DisplayFlexCollumn } from '../globalStyles/GlobalView.style';
 import Text from '../text/Text';
 import { theme } from '../../themes/themes';
@@ -13,7 +13,6 @@ import { textTypes } from '../text/textTypes';
 import { forwardRef, useState } from 'react';
 import { insertMaskInCpf } from '../../functions/cpf';
 import { insertMaskInPhone } from '../../functions/phone';
-// import { Icons } from '../../icon/icon';
 
 interface InputProps extends TextInputProps {
   margin?: string;
@@ -21,10 +20,25 @@ interface InputProps extends TextInputProps {
   errorMessage?: string;
   secureTextEntry?: boolean;
   type?: 'cel-phone' | 'cpf';
+  iconRight?: string;
+  onPressIconRight?: () => void;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
-  ({ margin, secureTextEntry, onChange, errorMessage, title, type, ...props }: InputProps, ref) => {
+  (
+    {
+      margin,
+      secureTextEntry,
+      onChange,
+      errorMessage,
+      title,
+      type,
+      iconRight,
+      onPressIconRight,
+      ...props
+    }: InputProps,
+    ref,
+  ) => {
     const [currentSecure, setcurrentSecure] = useState<boolean>(!!secureTextEntry);
 
     const handleOnChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
@@ -81,6 +95,7 @@ const Input = forwardRef<TextInput, InputProps>(
               size={25}
             />
           )}
+          {iconRight && (<IconSearch name={iconRight} size={20} onPress={onPressIconRight} />)}
         </View>
         {errorMessage && (
           <Text
